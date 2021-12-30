@@ -1,0 +1,116 @@
+/**
+ * Homework 7 - Channel
+ * <p>
+ * The Channel class represents details about a content uploader.
+ * This includes their channel name, subscribers, an array of Video
+ * objects created by them, and the number of uploads.
+ *
+ * @author Samhitha Mupharaphu Purdue CS
+ * @version October 12, 2021
+ */
+
+public class Channel {
+    /**
+     * Name of the channel
+     */
+    private final String channelName;
+    /**
+     * Number of subscribers of this channel
+     */
+    private int channelSubscribers;
+    /**
+     * Number of videos uploaded by this channel. This may be of use when iterating through the videos array.
+     */
+    private int numUploads;
+    /**
+     * An array containing videos uploaded by this creator.
+     */
+    private Video[] videos;
+
+    public Channel(String channelName) {
+        this.channelName = channelName;
+        this.channelSubscribers = 0;
+        this.numUploads = 0;
+        this.videos = new Video[100];
+    }
+
+    public Channel(String channelName, int channelSubscribers, int numUploads, Video[] videos) {
+        this.channelName = channelName;
+        this.channelSubscribers = channelSubscribers;
+        this.numUploads = numUploads;
+        this.videos = videos;
+    }
+
+    public void addChannelSubscriber() {
+        channelSubscribers = channelSubscribers + 1;
+    }
+
+    public Video findVideo(java.lang.String videoName) {
+        for (Video video : videos) {
+            if (video != null) {
+                if (video.getVideoName().equals(videoName)) {
+                    return video;
+                }
+            }
+        }
+        return null;
+    }
+
+    public String getChannelName() {
+        return channelName;
+    }
+
+    public int getChannelSubscribers() {
+        return channelSubscribers;
+    }
+
+    public int getNumUploads() {
+        return numUploads;
+    }
+
+    public int getTotalViews() {
+        int totalViews = 0;
+        for (Video video : videos) {
+            if (video != null) {
+                totalViews = totalViews + video.getViews();
+            }
+        }
+        return totalViews;
+    }
+
+    public Video[] getVideos() {
+        return videos;
+    }
+
+    public void setChannelSubscribers(int channelSubscribersVar) {
+        this.channelSubscribers = channelSubscribersVar;
+    }
+
+    public void setVideos(Video[] videosVar, int numUploadsVar) {
+        this.videos = videosVar;
+        this.numUploads = numUploadsVar;
+    }
+
+
+    public java.lang.String toString() {
+        StringBuilder string = new StringBuilder();
+        string.append("Channel[").append(channelName).append(", ").append(channelSubscribers).append(", ")
+                .append(numUploads).append("]");
+        return (string.toString());
+    }
+
+    public boolean uploadVideo(Video video) {
+        if (numUploads >= 100) {
+            return false;
+        }
+        if (findVideo(video.getVideoName()) != null) {
+            return false;
+        } else {
+            int length = numUploads;
+            this.videos[length] = video;
+            this.numUploads = numUploads + 1;
+        }
+        return true;
+    }
+
+}
