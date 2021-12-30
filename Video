@@ -1,0 +1,72 @@
+/**
+ * Homework 7 - Video
+ * <p>
+ * The Video class represents common details about a video uploaded to a video sharing platform.
+ * Each video is created by a Channel.
+ *
+ * @author Samhitha Mupharaphu Purdue CS
+ * @version October 12, 2021
+ */
+
+public class Video {
+    /**
+     * Name of the video.
+     */
+    private final String videoName;
+    /**
+     * Channel which created the video.
+     */
+    private final Channel channel;
+    /**
+     * Length of video in seconds
+     */
+    private final int duration;
+    /**
+     * Number of views for the video, initialized at zero.
+     */
+    private int numViews;
+    private int minutes;
+    private int seconds;
+
+    public Video(java.lang.String videoName, Channel channel, int minutes, int seconds) {
+        this.videoName = videoName;
+        this.channel = channel;
+        this.duration = (minutes * 60) + seconds;
+        this.numViews = 0;
+        this.minutes = minutes;
+        this.seconds = seconds;
+    }
+
+    public void addView() {
+        numViews = numViews + 1;
+    }
+
+    public Channel getChannel() {
+        return channel;
+    }
+
+    public String getDuration() {
+        return String.format("%d:%d", minutes, seconds);
+    }
+
+    public String getVideoName() {
+        return videoName;
+    }
+
+    public int getViews() {
+        return numViews;
+    }
+
+    public void setViews(int numViewsVar) {
+        this.numViews = numViewsVar;
+    }
+
+    public java.lang.String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Video[").append(videoName).append(", ").append(channel).append(", ")
+                .append(minutes).append(":")
+                .append(seconds).append(", ").append(numViews).append("]");
+        return (stringBuilder.toString());
+    }
+}
+
